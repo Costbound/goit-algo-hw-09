@@ -16,9 +16,9 @@ def find_min_coins(amount):
     dp[0] = 0
     coin_count = [{} for _ in range(amount + 1)]
     
-    for i in range(1, amount + 1):
-        for coin in coins:
-            if i >= coin and dp[i - coin] + 1 < dp[i]:
+    for coin in coins:
+        for i in range(coin, amount + 1):
+            if dp[i - coin] + 1 < dp[i]:
                 dp[i] = dp[i - coin] + 1
                 coin_count[i] = coin_count[i - coin].copy()
                 if coin in coin_count[i]:
@@ -27,3 +27,6 @@ def find_min_coins(amount):
                     coin_count[i][coin] = 1
     
     return coin_count[amount]
+
+print(find_coins_greedy(113))
+print(find_min_coins(113))
